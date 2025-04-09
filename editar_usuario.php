@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     // Validação do nível de acesso
-    $niveis_validos = ['usuario', 'visualizador'];
+    $niveis_validos = ['administrador', 'usuario', 'visualizador'];
     if (!in_array($_POST['nivel_acesso'], $niveis_validos)) {
         $erros[] = "Nível de acesso inválido";
     }
@@ -131,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label class="w3-text-blue"><b>Nível de Acesso</b></label>
             <select class="w3-select w3-border" name="nivel_acesso" required>
+                <option value="administrador" <?php echo $usuario['nivel_acesso'] == 'administrador' ? 'selected' : ''; ?>>Administrador</option>
                 <option value="usuario" <?php echo $usuario['nivel_acesso'] == 'usuario' ? 'selected' : ''; ?>>Usuário</option>
                 <option value="visualizador" <?php echo $usuario['nivel_acesso'] == 'visualizador' ? 'selected' : ''; ?>>Visualizador</option>
             </select>
@@ -141,4 +142,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 </body>
-</html> 
+</html>

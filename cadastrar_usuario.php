@@ -45,7 +45,6 @@ unset($_SESSION['mensagem']);
     </style>
 </head>
 <body>
-
     <div class="w3-container w3-blue">
         <h2>Cadastrar Novo Usuário</h2>
     </div>
@@ -97,6 +96,7 @@ unset($_SESSION['mensagem']);
                 <label class="w3-text-blue"><b>Nível de Acesso</b></label>
                 <select class="w3-select w3-border" name="nivel_acesso" required>
                     <option value="">Selecione o nível de acesso</option>
+                    <option value="administrador" <?php echo isset($dados_form['nivel_acesso']) && $dados_form['nivel_acesso'] == 'administrador' ? 'selected' : ''; ?>>Administrador</option>
                     <option value="usuario" <?php echo isset($dados_form['nivel_acesso']) && $dados_form['nivel_acesso'] == 'usuario' ? 'selected' : ''; ?>>Usuário</option>
                     <option value="visualizador" <?php echo isset($dados_form['nivel_acesso']) && $dados_form['nivel_acesso'] == 'visualizador' ? 'selected' : ''; ?>>Visualizador</option>
                 </select>
@@ -117,28 +117,22 @@ unset($_SESSION['mensagem']);
             document.querySelectorAll('.error-message').forEach(elem => elem.textContent = '');
             
             // Validar nome
-            const nome = document.getElementById('nome').value;
+            const nome = document.getElementById('nome').value.trim();
             if (nome.length < 3) {
                 document.getElementById('nome-error').textContent = 'O nome deve ter pelo menos 3 caracteres';
                 isValid = false;
             }
             
             // Validar email
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 document.getElementById('email-error').textContent = 'Email inválido';
                 isValid = false;
             }
             
-            // Validar senha
-            const senha = document.getElementById('senha').value;
-            if (senha.length < 6) {
-                document.getElementById('senha-error').textContent = 'A senha deve ter pelo menos 6 caracteres';
-                isValid = false;
-            }
-            
             // Validar confirmação de senha
+            const senha = document.getElementById('senha').value;
             const confirmarSenha = document.getElementById('confirmar_senha').value;
             if (senha !== confirmarSenha) {
                 document.getElementById('confirmar-senha-error').textContent = 'As senhas não coincidem';
@@ -148,6 +142,5 @@ unset($_SESSION['mensagem']);
             return isValid;
         }
     </script>
-
 </body>
 </html>
