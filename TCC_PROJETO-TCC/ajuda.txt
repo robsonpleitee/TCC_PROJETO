@@ -1,0 +1,228 @@
+Parece que o repositório ainda não foi criado no GitHub. Antes de fazer o push, você precisa:
+Ir ao GitHub (https://github.com)
+Fazer login na sua conta
+Clicar no botão "+" no canto superior direito
+Selecionar "New repository"
+Preencher:
+Repository name: TCC_Sistema-de-Controle-de-Estoque-Web
+Description (opcional): Sistema web para controle de estoque desenvolvido em PHP
+Deixar o repositório como Public
+NÃO inicialize o repositório com README, .gitignore ou license
+Clicar em "Create repository"
+Depois que você criar o repositório no GitHub, me avise para continuarmos com o push do código.
+
+Ótimo! Agora que o repositório foi criado, vamos tentar fazer o push novamente:
+git push -u origin main
+
+Perfeito! O push foi realizado com sucesso. Todas as suas alterações foram enviadas para o repositório remoto no GitHub. Agora você pode:
+Acessar seu repositório em: https://github.com/robsonpleitee/TCC_Sistema-de-Controle-de-Estoque-Web
+Verificar se todos os arquivos foram enviados corretamente
+Compartilhar o link do repositório com outras pessoas
+Para futuras alterações, você pode usar os seguintes comandos:
+
+git add . para adicionar as alterações
+git commit -m "sua mensagem" para criar um commit
+git push para enviar as alterações para o GitHub
+Precisa de mais alguma ajuda?
+
+Vou te explicar como criar uma branch master (agora chamada de "main" por padrão) no GitHub:
+
+1. Se você está criando um novo repositório:
+```bash
+# Crie um novo repositório local
+git init
+
+# Adicione seus arquivos
+git add .
+
+# Faça o primeiro commit
+git commit -m "Primeiro commit"
+
+# Renomeie a branch principal para main (padrão atual do GitHub)
+git branch -M main
+
+# Conecte ao repositório remoto (substitua com sua URL do GitHub)
+git remote add origin https://github.com/seu-usuario/seu-repositorio.git
+
+# Faça o push da branch main
+git push -u origin main
+```
+
+2. Se você quer criar uma branch main em um repositório existente:
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/seu-repositorio.git
+
+# Certifique-se de estar na branch principal
+git checkout main
+
+# Ou se ainda usar master como nome
+git checkout master
+```
+
+Observações importantes:
+1. O GitHub agora usa "main" como nome padrão para a branch principal em vez de "master"
+2. Se você estiver trabalhando em um repositório existente, verifique qual nome está sendo usado
+3. Para verificar em qual branch você está:
+```bash
+git branch
+```
+
+Para alterar de master para main em um repositório existente:
+```bash
+# Renomeie a branch local
+git branch -M master main
+
+# Atualize o remoto
+git push -u origin main
+```
+
+JA TEM UM REPOSITORIO MAS NÃO APARECE COM MASTER
+
+Vou te ajudar a verificar e configurar a branch principal no seu repositório existente:
+
+1. Primeiro, verifique qual branch está sendo usada atualmente:
+```bash
+# Verifique todas as branches
+git branch -a
+```
+
+2. Se você não vê nenhuma branch principal, você pode criar uma assim:
+```bash
+# Certifique-se de que todos seus arquivos estão commitados
+git add .
+git commit -m "Primeiro commit"
+
+# Crie e mude para a branch main
+git checkout -b main
+
+# Faça o push para o GitHub
+git push -u origin main
+```
+
+3. Se você já tem arquivos no GitHub mas não está vendo a branch principal:
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/seu-repositorio.git
+
+# Entre no diretório do repositório
+cd seu-repositorio
+
+# Configure a branch principal
+git checkout -b main
+
+# Faça o push
+git push -u origin main
+```
+
+4. Se você quer definir 'main' como branch padrão:
+- Vá para seu repositório no GitHub
+- Clique em "Settings" (Configurações)
+- No menu lateral esquerdo, clique em "Branches"
+- Em "Default branch", clique no botão de editar (ícone de lápis)
+- Selecione "main" como branch padrão
+- Clique em "Update"
+
+Se você ainda está tendo problemas, pode me dizer:
+1. O que aparece quando você roda `git branch -a`?
+2. Você consegue ver alguma branch no GitHub através da interface web?
+
+COMO MUDO DE PRIVATE PARA PUBLICO NO GIT?
+Para mudar um repositório de privado para público no GitHub, siga estes passos simples:
+
+1. Pela interface web do GitHub:
+- Vá para o seu repositório no GitHub
+- Clique em "Settings" (Configurações) na barra superior
+- Role para baixo até a seção "Danger Zone"
+- Encontre "Change repository visibility" (Mudar visibilidade do repositório)
+- Clique no botão "Change visibility" (Mudar visibilidade)
+- Selecione "Make public" (Tornar público)
+- Digite o nome do repositório para confirmar
+- Clique em "I understand, make this repository public"
+
+⚠️ Observações importantes:
+- Esta ação é reversível (você pode torná-lo privado novamente depois)
+- Todos os forks também se tornarão públicos
+- Todos poderão ver seu código depois da mudança
+- Se você está usando GitHub Free, repositórios privados têm algumas limitações
+- Certifique-se de que não há informações sensíveis no repositório antes de torná-lo público
+
+Para adicionar um arquivo no Git, você tem algumas opções:
+
+### 1. Usando o Git Bash ou terminal:
+````bash
+# Adicionar um arquivo específico
+git add nome-do-arquivo.extensao
+
+# Adicionar todos os arquivos
+git add .
+
+# Adicionar todos os arquivos de um tipo específico
+git add *.js
+````
+
+### 2. Depois de adicionar, você precisa fazer o commit:
+````bash
+# Commit com mensagem
+git commit -m "Mensagem descrevendo as alterações"
+````
+
+### 3. E finalmente, enviar para o repositório remoto:
+````bash
+# Push para o repositório remoto
+git push origin main
+````
+
+### 4. Para verificar o status dos arquivos:
+````bash
+# Ver quais arquivos foram adicionados/modificados
+git status
+````
+
+### Dica usando VS Code:
+- Você também pode usar a interface gráfica do VS Code
+- Abra o controle de versão (ícone com ramificações)
+- Clique no + ao lado do arquivo que deseja adicionar
+- Digite sua mensagem de commit
+- Clique no ✓ para fazer o commit
+- Use o botão "Sync Changes" para enviar as alterações
+
+Precisa de mais detalhes sobre algum desses passos?
+
+apaguei uma branch no remoto mas ele continua aparecendo aqui
+
+Para resolver o problema de uma branch remota deletada que ainda aparece localmente, siga estes passos:
+
+1. **Primeiro, atualize as referências remotas**:
+````bash
+git fetch --prune
+````
+
+2. **Para ver todas as branches (locais e remotas)**:
+````bash
+git branch -a
+````
+
+3. **Para deletar a branch local**:
+````bash
+git branch -d nome-da-branch
+````
+
+4. **Se a branch local tiver mudanças não mergeadas e você realmente quer deletá-la**:
+````bash
+git branch -D nome-da-branch
+````
+
+5. **Para atualizar manualmente as referências remotas**:
+````bash
+git remote update origin --prune
+````
+
+### Explicação:
+- O comando `--prune` remove referências que não existem mais no repositório remoto
+- `-d` é para deleção segura (só deleta se a branch já foi mergeada)
+- `-D` é para deleção forçada (use com cautela)
+
+Se após estes passos a branch ainda aparecer, você pode precisar limpar o cache do Git:
+````bash
+git gc --prune=now
