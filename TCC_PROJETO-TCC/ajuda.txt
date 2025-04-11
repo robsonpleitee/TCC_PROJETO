@@ -226,3 +226,53 @@ git remote update origin --prune
 Se após estes passos a branch ainda aparecer, você pode precisar limpar o cache do Git:
 ````bash
 git gc --prune=now
+
+
+
+# Enviando arquivo para uma branch específica
+
+Aqui está o passo a passo para enviar um arquivo para uma branch específica:
+
+### 1. Primeiro, mude para a branch desejada:
+````bash
+git checkout nome-da-branch
+````
+
+### 2. Adicione o arquivo:
+````bash
+# Para um arquivo específico
+git add caminho/do/arquivo.extensao
+
+# Ou para todos os arquivos modificados
+git add .
+````
+
+### 3. Faça o commit:
+````bash
+git commit -m "Sua mensagem de commit"
+````
+
+### 4. Envie para a branch específica:
+````bash
+git push origin nome-da-branch
+````
+
+### Se a branch ainda não existe no remoto:
+````bash
+# Crie a branch local e mude para ela
+git checkout -b nome-da-nova-branch
+
+# Adicione e faça commit dos arquivos
+git add .
+git commit -m "Sua mensagem"
+
+# Faça push criando a branch remota
+git push -u origin nome-da-nova-branch
+````
+
+### Para verificar em qual branch você está:
+````bash
+git branch
+````
+
+**Importante**: Certifique-se sempre de estar na branch correta antes de adicionar/commitar arquivos.
