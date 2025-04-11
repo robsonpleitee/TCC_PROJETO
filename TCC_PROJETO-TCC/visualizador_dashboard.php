@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'visualizador') {
@@ -21,8 +20,9 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'visualizado
     </div>
 
     <div class="w3-container">
-        <p>Você pode apenas visualizar produtos.</p>
+        <p>Você pode visualizar produtos e relatórios.</p>
         <a href="lista_produtos.php" class="w3-button w3-blue">Ver Produtos</a>
+        <a href="relatorio_produtos.php" class="w3-button w3-green">Gerar Relatórios</a>
         <a href="logout.php" class="w3-button w3-red">Sair</a>
     </div>
 

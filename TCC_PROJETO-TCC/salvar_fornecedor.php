@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] == 'visualizador') {
+if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'administrador') {
     header("Location: login.php");
     exit();
 }
@@ -96,4 +96,4 @@ $conn->close();
 
 // Redireciona de volta para a página de cadastro
 header("Location: cadastrar_fornecedor.php");
-?> 
+?>

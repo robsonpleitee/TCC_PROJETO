@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] == 'visualizador') {
+if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'administrador') {
     header("Location: login.php");
     exit();
 }
@@ -43,4 +43,4 @@ $stmt->close();
 $conn->close();
 
 header("Location: lista_fornecedores.php");
-exit(); 
+exit();

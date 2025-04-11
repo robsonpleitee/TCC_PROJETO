@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] == 'visualizador') {
+// Corrigir para permitir apenas administradores
+if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'administrador') {
     header("Location: login.php");
     exit();
 }

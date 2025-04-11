@@ -67,10 +67,15 @@ if (!isset($_SESSION['usuario_id'])) {
 
 <div class="w3-container w3-margin-top">
     <a href="lista_produtos.php" class="w3-button w3-blue">Ver Lista Completa de Produtos</a>
-    <a href="lista_fornecedores.php" class="w3-button w3-blue">Gerenciar Fornecedores</a>
+    
+    <!-- Mostrar link de relatórios para todos os usuários -->
+    <a href="relatorio_produtos.php" class="w3-button w3-green">Gerar Relatórios</a>
+    
     <?php if ($_SESSION['nivel_acesso'] == 'administrador'): ?>
+        <a href="lista_fornecedores.php" class="w3-button w3-blue">Gerenciar Fornecedores</a>
         <a href="admin_dashboard.php" class="w3-button w3-green">Painel do Administrador</a>
     <?php endif; ?>
+    
     <a href="logout.php" class="w3-button w3-red">Sair</a>
 </div>
 
