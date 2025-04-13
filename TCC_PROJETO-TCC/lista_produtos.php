@@ -12,6 +12,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Produtos em Estoque</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
@@ -34,9 +35,9 @@ if (!isset($_SESSION['usuario_id'])) {
             </div>
         <?php endif; ?>
 
-        <table class="w3-table w3-striped">
+        <table class="w3-table w3-striped w3-bordered w3-hoverable w3-card-4">
             <thead>
-                <tr>
+                <tr class="w3-blue">
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Quantidade</th>
@@ -52,7 +53,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 include 'conexao.php';
 
                 // Consulta para buscar os produtos
-                $sql = "SELECT id, nome, quantidade, preco FROM produtos";
+                $sql = "SELECT id, nome, quantidade, preco FROM produtos ORDER BY nome";
                 $result = $conn->query($sql);
 
                 // Verifica se há resultados e exibe os dados
@@ -60,19 +61,23 @@ if (!isset($_SESSION['usuario_id'])) {
                     while($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row["id"] . "</td>";
-                        echo "<td>" . $row["nome"] . "</td>";
+                        echo "<td>" . htmlspecialchars($row["nome"]) . "</td>";
                         echo "<td>" . $row["quantidade"] . "</td>";
                         echo "<td>R$ " . number_format($row["preco"], 2, ',', '.') . "</td>";
+                        
+                        // Adiciona botões de ação apenas para administradores e usuários comuns
                         if ($_SESSION['nivel_acesso'] != 'visualizador') {
-                            echo "<td>
-                                    <a href='editar_produto.php?id=" . $row["id"] . "' class='w3-button w3-blue w3-small'>Editar</a>
-                                    <a href='excluir_produto.php?id=" . $row["id"] . "' class='w3-button w3-red w3-small' onclick='return confirm(\"Tem certeza que deseja excluir este produto?\")'>Excluir</a>
-                                  </td>";
+                            echo "<td>";
+                            echo "<a href='editar_produto.php?id=" . $row["id"] . "' class='w3-button w3-small w3-blue'><i class='fas fa-edit'></i> Editar</a> ";
+                            echo "<a href='excluir_produto.php?id=" . $row["id"] . "' class='w3-button w3-small w3-red' onclick=\"return confirm('Tem certeza que deseja excluir este produto?');\"><i class='fas fa-trash'></i> Excluir</a>";
+                            echo "</td>";
                         }
+                        
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='4'>Nenhum produto encontrado</td></tr>";
+                    $colspan = ($_SESSION['nivel_acesso'] != 'visualizador') ? 5 : 4;
+                    echo "<tr><td colspan='$colspan' class='w3-center'>Nenhum produto encontrado</td></tr>";
                 }
 
                 // Fecha a conexão com o banco de dados
@@ -83,7 +88,17 @@ if (!isset($_SESSION['usuario_id'])) {
     </div>
 
     <div class="w3-container w3-margin-top">
-        <a href="index.php" class="w3-button w3-blue">Voltar para o Dashboard</a>
+        <?php if ($_SESSION['nivel_acesso'] != 'visualizador'): ?>
+            <a href="index.php" class="w3-button w3-green"><i class="fas fa-plus"></i> Adicionar Novo Produto</a>
+        <?php endif; ?>
+        
+        <?php if ($_SESSION['nivel_acesso'] == 'administrador'): ?>
+            <a href="admin_dashboard.php" class="w3-button w3-blue"><i class="fas fa-tachometer-alt"></i> Voltar para o Dashboard</a>
+        <?php elseif ($_SESSION['nivel_acesso'] == 'usuario'): ?>
+            <a href="usuario_dashboard.php" class="w3-button w3-blue"><i class="fas fa-tachometer-alt"></i> Voltar para o Dashboard</a>
+        <?php else: ?>
+            <a href="visualizador_dashboard.php" class="w3-button w3-blue"><i class="fas fa-tachometer-alt"></i> Voltar para o Dashboard</a>
+        <?php endif; ?>
     </div>
 
 </body>

@@ -58,6 +58,9 @@ if ($result->num_rows > 0) {
             case 'visualizador':
                 header("Location: visualizador_dashboard.php");
                 break;
+            default:
+                header("Location: index.php");
+                break;
         }
         exit();
     } else {
