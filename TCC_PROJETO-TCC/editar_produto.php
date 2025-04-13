@@ -7,6 +7,14 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] == 'visualizado
 
 include 'conexao.php';
 
+// Para cada arquivo que usa a função registrarOperacao:
+
+// 1. Verificar se o arquivo de logs existe
+$usar_logs = file_exists('registrar_logs.php');
+if ($usar_logs) {
+    include 'registrar_logs.php';
+}
+
 // Verifica se o ID foi fornecido
 if (!isset($_GET['id'])) {
     header("Location: lista_produtos.php");
@@ -56,6 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sidi", $nome, $quantidade, $preco, $id);
         
         if ($stmt->execute()) {
+            // Registrar a operação no log
+            $detalhes = "Produto ID {$id} atualizado - Nome: '{$nome}', Qtd: {$quantidade}, Preço: R$ " . number_format($preco, 2, ',', '.') . "";
+            
+            // 2. Ao usar a função, verificar se ela está disponível
+            if ($usar_logs && function_exists('registrarOperacao')) {
+                registrarOperacao($conn, $_SESSION['usuario_id'], 'atualizar', 'produtos', $id, $detalhes);
+            }
+            
             $_SESSION['mensagem'] = "Produto atualizado com sucesso!";
             header("Location: lista_produtos.php");
             exit();
@@ -110,4 +126,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 </body>
-</html> 
+</html>

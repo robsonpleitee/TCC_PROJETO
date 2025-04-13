@@ -1,11 +1,17 @@
 <?php
 session_start();
+include 'conexao.php';
+
+// Verificar se o arquivo registrar_logs.php existe antes de tentar incluí-lo
+$usar_logs = file_exists('registrar_logs.php');
+if ($usar_logs) {
+    include 'registrar_logs.php';
+}
+
 if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] == 'visualizador') {
     header("Location: login.php");
     exit();
 }
-
-include 'conexao.php';
 
 // Validação dos dados recebidos
 $erros = [];
@@ -46,7 +52,17 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("sid", $nome, $quantidade, $preco);
 
 if ($stmt->execute()) {
+    $produto_id = $conn->insert_id;
+    
+    // Registrar a operação no log apenas se o sistema de logs estiver disponível
+    if ($usar_logs && function_exists('registrarOperacao')) {
+        $detalhes = "Produto '{$nome}' (Qtd: {$quantidade}, Preço: R$ " . number_format($preco, 2, ',', '.') . ") adicionado";
+        registrarOperacao($conn, $_SESSION['usuario_id'], 'inserir', 'produtos', $produto_id, $detalhes);
+    }
+    
     $_SESSION['mensagem'] = "Produto adicionado com sucesso!";
+    header("Location: index.php");
+    exit();
 } else {
     $_SESSION['erros_produto'] = ["Erro ao adicionar produto: " . $stmt->error];
 }

@@ -8,14 +8,18 @@ Sistema web para controle de estoque desenvolvido em PHP com diferentes níveis 
 - Gerenciamento de usuários
 - Diferentes níveis de acesso:
   - Administrador: acesso total ao sistema
-  - Usuário: pode gerenciar produtos
+  - Usuário: pode gerenciar produtos e gerar relatórios
   - Visualizador: apenas visualiza produtos
+- Geração de relatórios avançados (diários, semanais e mensais)
+- Exportação em PDF e Excel
+- Log de atividades dos usuários
 
 ## Requisitos
 
 - PHP 7.0 ou superior
 - MySQL 5.6 ou superior
 - Servidor web (Apache, Nginx, etc.)
+- Biblioteca TCPDF para geração de PDFs
 
 ## Instalação
 
@@ -29,6 +33,32 @@ git clone [URL_DO_REPOSITORIO]
 3. Configure a conexão com o banco de dados no arquivo `conexao.php`
 
 4. Acesse o sistema através do navegador
+
+## Instalação do TCPDF
+
+Para gerar relatórios em PDF, siga um dos métodos abaixo:
+
+### Método 1: Usando o instalador automático (recomendado)
+
+1. Acesse o arquivo `instalar_tcpdf.php` através do seu navegador
+2. O script baixará e instalará automaticamente o TCPDF no projeto
+3. Após a instalação, clique no link para testar se está funcionando
+
+### Método 2: Download manual
+
+Se o instalador automático não funcionar:
+
+1. Baixe a última versão do TCPDF em: https://github.com/tecnickcom/TCPDF/releases
+2. Extraia os arquivos para uma pasta chamada `tcpdf` no diretório raiz do projeto
+3. Teste o funcionamento acessando o arquivo `teste_tcpdf.php`
+
+### Método 3: Via Composer
+
+Se você usa Composer:
+
+```bash
+composer require tecnickcom/tcpdf
+```
 
 ## Configuração do Banco de Dados
 
@@ -72,4 +102,4 @@ VALUES ('Admin', 'admin@example.com', '$2y$10$ExemploDeHash', 'administrador');
 
 ## Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes. 
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.

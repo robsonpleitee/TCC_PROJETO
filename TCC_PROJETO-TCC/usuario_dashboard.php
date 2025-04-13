@@ -91,7 +91,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'usuario') {
                     <div class="feature-card">
                         <h4><i class="fas fa-chart-bar"></i> Relatórios</h4>
                         <p>Gere relatórios sobre o estoque atual.</p>
-                        <a href="relatorio_produtos.php" class="w3-button w3-amber">Gerar Relatórios</a>
+                        <a href="relatorios_avancados.php" class="w3-button w3-amber">Gerar Relatórios</a>
                     </div>
                 </div>
             </div>

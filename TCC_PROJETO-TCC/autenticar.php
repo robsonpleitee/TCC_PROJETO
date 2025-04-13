@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'conexao.php';
+include 'registrar_logs.php';  // Adicione esta linha
 
 // Validação dos dados de entrada
 $erros = [];
@@ -22,7 +23,6 @@ if (!empty($_POST['email']) && !filter_var($_POST['email'], FILTER_VALIDATE_EMAI
 // Se houver erros, redireciona de volta com as mensagens
 if (!empty($erros)) {
     $_SESSION['erros_login'] = $erros;
-    $_SESSION['email_login'] = $_POST['email'] ?? '';
     header("Location: login.php");
     exit();
 }
@@ -39,14 +39,18 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $usuario = $result->fetch_assoc();
-
+    
     // Verifica a senha
     if (password_verify($senha, $usuario['senha'])) {
-        // Login bem-sucedido
+        // O login foi bem-sucedido
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['usuario_nome'] = $usuario['nome'];
         $_SESSION['nivel_acesso'] = $usuario['nivel_acesso'];
-
+        
+        // Registrar o login no log de acessos
+        $detalhes = "Login no sistema. IP: " . $_SERVER['REMOTE_ADDR'];
+        registrarAcesso($conn, $usuario['id'], 'login', $detalhes);
+        
         // Redireciona conforme o nível de acesso
         switch ($usuario['nivel_acesso']) {
             case 'administrador':
@@ -64,13 +68,12 @@ if ($result->num_rows > 0) {
         }
         exit();
     } else {
-        $_SESSION['erros_login'] = ["Senha incorreta"];
-        $_SESSION['email_login'] = $email;
+        $_SESSION['erros_login'] = ["Email ou senha incorretos"];
         header("Location: login.php");
         exit();
     }
 } else {
-    $_SESSION['erros_login'] = ["Usuário não encontrado"];
+    $_SESSION['erros_login'] = ["Email ou senha incorretos"];
     header("Location: login.php");
     exit();
 }

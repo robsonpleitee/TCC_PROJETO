@@ -85,6 +85,18 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'administrad
         </div>
 
         <div class="menu-section">
+            <h3 class="menu-title"><i class="fas fa-chart-bar"></i> Relatórios</h3>
+            <div class="button-group">
+                <a href="relatorio_produtos.php" class="w3-button w3-blue">
+                    <i class="fas fa-boxes"></i> Relatório de Produtos
+                </a>
+                <a href="relatorios_avancados.php" class="w3-button w3-deep-orange">
+                    <i class="fas fa-chart-line"></i> Relatórios Avançados
+                </a>
+            </div>
+        </div>
+
+        <div class="menu-section">
             <h3 class="menu-title">Sistema</h3>
             <div class="button-group">
                 <a href="configuracoes.php" class="w3-button w3-grey">
@@ -93,7 +105,7 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['nivel_acesso'] != 'administrad
                 <a href="backup.php" class="w3-button w3-grey">
                     <i class="fas fa-database"></i> Backup
                 </a>
-                <a href="logs.php" class="w3-button w3-grey">
+                <a href="relatorios_avancados.php" class="w3-button w3-grey">
                     <i class="fas fa-history"></i> Logs do Sistema
                 </a>
             </div>
